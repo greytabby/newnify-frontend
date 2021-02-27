@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import 'fontsource-roboto'
-import MyAppBar from './layout/AppBar'
-import MyDrawer from './layout/Drawer'
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline'
+import RssFeeds from './views/RssFeeds'
 
-// import { createMuiTheme } from '@material-ui/core/styles';
+// import { createMuiTheme } from '@material-ui/core/styles'
 
 /*
 const theme = createMuiTheme({
@@ -22,8 +22,9 @@ const theme = createMuiTheme({
 function App() {
   return (
     <div className="App">
-      <MyAppBar/>
-      <MyDrawer/>
+      <ScopedCssBaseline>
+        <RssFeeds/>
+      </ScopedCssBaseline>
     </div>
   );
 }

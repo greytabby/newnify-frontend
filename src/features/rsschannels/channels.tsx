@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton'
 import Refresh from '@material-ui/icons/Refresh'
 import { useSelector, useDispatch } from 'react-redux';
-import { refreshAsync, selectRssChannels } from './rssChannelsSlice'
+import { refreshAsync, fetchFeedsAsync, selectRssChannels } from './rssChannelsSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     refreshIcon: {
+      alignContent: 'left',
       marginLeft: theme.spacing(1),
     },
     inline: {
@@ -43,7 +44,7 @@ const ChannelList: React.FC<{}> = () => {
     return channels.map((v) => {
       return (
         <div>
-          <ListItem key={v.id} alignItems="flex-start" component="article">
+          <ListItem button key={v.id} alignItems="flex-start" component="article" onClick={() => dispatch(fetchFeedsAsync(v.id))}>
             <ListItemText
               primary={
                 <React.Fragment>
@@ -70,6 +71,9 @@ const ChannelList: React.FC<{}> = () => {
       <IconButton className={classes.refreshIcon} onClick={() => dispatch(refreshAsync()) }>
         <Refresh/>
       </IconButton>
+      <Typography>
+        RSS Channels
+      </Typography>
       <List>
         {generate()}
       </List>

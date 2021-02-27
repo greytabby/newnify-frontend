@@ -10,12 +10,28 @@ interface RssChannel {
   description: string
 }
 
+interface RssItem {
+  title: string
+  description: string
+  link: string
+  published: string
+  guid: string
+  read: boolean
+}
+
+interface RssChannelFeeds {
+  channel: RssChannel
+  items: RssItem[]
+}
+
 interface RssChannelsState {
   channels: RssChannel[]
+  channelFeeds: RssChannelFeeds | null
 }
 
 const initialState: RssChannelsState = {
-  channels: []
+  channels: [],
+  channelFeeds: null
 }
 
 export const rssChannelsSlice = createSlice({
@@ -31,11 +47,17 @@ export const rssChannelsSlice = createSlice({
     },
     fetchSuccess: (state, action: PayloadAction<RssChannel[]>) => {
       state.channels.splice(0, state.channels.length, ...action.payload)
+    },
+    feedsFetchFailure: (state, action) => {
+      console.log(action)
+    },
+    feedsFetchSuccess: (state, action: PayloadAction<RssChannelFeeds>) => {
+      state.channelFeeds = action.payload
     }
   }
 })
 
-export const { refresh, fetchFailure, fetchSuccess } = rssChannelsSlice.actions
+export const { refresh, fetchFailure, fetchSuccess, feedsFetchFailure, feedsFetchSuccess } = rssChannelsSlice.actions
 
 export const refreshAsync = (): AppThunk => async dispatch => {
   const url = 'http://localhost:7777/channels'
@@ -47,6 +69,17 @@ export const refreshAsync = (): AppThunk => async dispatch => {
   }
 }
 
+export const fetchFeedsAsync = (channelId: string): AppThunk => async dispatch => {
+  const url = `http://localhost:7777/channels/${channelId}/feeds`
+  try {
+    const resp = await axios.get<RssChannelFeeds>(url)
+    dispatch(feedsFetchSuccess(resp.data))
+  } catch (error) {
+    dispatch(feedsFetchFailure(error))
+  }
+}
+
 export const selectRssChannels = (state: RootState) => state.rssChannels.channels
+export const selectRssChannelFeeds = (state: RootState) => state.rssChannels.channelFeeds
 
 export default rssChannelsSlice.reducer
