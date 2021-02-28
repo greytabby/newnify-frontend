@@ -52,6 +52,12 @@ export const rssChannelsSlice = createSlice({
       console.log(action)
     },
     feedsFetchSuccess: (state, action: PayloadAction<RssChannelFeeds>) => {
+      action.payload.items = action.payload.items.sort((a, b) => {
+        const aDate = new Date(a.published)
+        const bDate = new Date(b.published)
+        return  bDate.getTime() - aDate.getTime()
+      })
+
       state.channelFeeds = action.payload
     }
   }

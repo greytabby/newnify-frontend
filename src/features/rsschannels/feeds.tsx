@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { useSelector } from 'react-redux'
 import { selectRssChannelFeeds } from './rssChannelsSlice'
+import dayjs from 'dayjs'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,16 +39,17 @@ const Feeds: React.FC<{}> = () => {
   }
 
   const calcElapsedTime = (d: string) => {
-    const now = new Date()
-    const pubDate = new Date(d)
-    const elapsedDays = now.getDay() - pubDate.getDay()
-    return `${String(elapsedDays)} day ago`
+    const now = dayjs(new Date())
+    const pubDate = dayjs(d)
+    const elapsedDays = now.diff(pubDate, 'days')
+    return `${String(elapsedDays)}d`
   }
 
   const generate = () => {
     if (feeds === null) {
       return
     }
+
     return feeds.items.map((v) => {
       return (
         <ListItem button key={v.link} alignItems="flex-start" component="a" href={v.link} target="_blank" rel="noopener noreferrer">

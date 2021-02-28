@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MyAppBar: React.FC = (props) => {
   const classes = useStyles()
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
