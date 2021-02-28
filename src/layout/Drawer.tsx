@@ -53,34 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const MyDrawer: React.FC = (props) => {
-  const classes = useStyles()
-  const theme = useTheme()
-
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
-      <Drawer
-        variant='temporary'
-        anchor='left'
-        open={open}
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        {props.children}
-      </Drawer>
     </div>
   )
 }
