@@ -2,7 +2,6 @@ import React from 'react'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import Divider from '@material-ui/core/Divider'
 import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
@@ -51,41 +50,38 @@ const Feeds: React.FC<{}> = () => {
     }
     return feeds.items.map((v) => {
       return (
-        <div>
-          <ListItem button key={v.guid} alignItems="flex-start" component="a" href={v.link} target="_blank" rel="noopener noreferrer">
-            <ListItemText
-              primary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body1"
-                    color="textPrimary"
-                  >
-                    {v.title}
-                  </Typography>
-                  <Typography
-                    className={classes.date}
-                    component="span"
-                    variant="overline"
-                    color="textSecondary"
-                  >
-                    {calcElapsedTime(v.published)}
-                  </Typography>
-                </React.Fragment>
-              }
-              secondary={
+        <ListItem button key={v.link} alignItems="flex-start" component="a" href={v.link} target="_blank" rel="noopener noreferrer">
+          <ListItemText
+            primary={
+              <React.Fragment>
                 <Typography
                   component="span"
-                  variant="subtitle1"
+                  variant="body1"
+                  color="textPrimary"
+                >
+                  {v.title}
+                </Typography>
+                <Typography
+                  className={classes.date}
+                  component="span"
+                  variant="overline"
                   color="textSecondary"
                 >
-                  {v.description.substring(0, 100) + '...'}
+                  {calcElapsedTime(v.published)}
                 </Typography>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </div>
+              </React.Fragment>
+            }
+            secondary={
+              <Typography
+                component="span"
+                variant="subtitle1"
+                color="textSecondary"
+              >
+                {v.description.substring(0, 100) + '...'}
+              </Typography>
+            }
+          />
+        </ListItem>
       )
     })
   }

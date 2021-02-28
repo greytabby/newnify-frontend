@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton'
@@ -15,8 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       margin: 10,
-      width: '100%',
-      maxWidth: '36ch',
       backgroundColor: theme.palette.background.paper,
     },
     refreshIcon: {
@@ -39,29 +36,30 @@ const ChannelList: React.FC<{}> = () => {
     dispatch(refreshAsync())
   }, [dispatch])
 
+  const displayTitle = (s: string) => {
+    if (s.length > 30) {
+      return s.substring(0, 15) + '...'
+    }
+    return s
+  }
+
   const generate = () => {
-    console.log("Generate")
     return channels.map((v) => {
       return (
-        <div>
-          <ListItem button key={v.id} alignItems="flex-start" component="article" onClick={() => dispatch(fetchFeedsAsync(v.id))}>
-            <ListItemText
-              primary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    {v.title}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </div>
+        <ListItem button key={v.id} alignItems="flex-start" component="article" onClick={() => dispatch(fetchFeedsAsync(v.id))}>
+          <ListItemText
+            primary={
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {displayTitle(v.title)}
+              </Typography>
+            }
+          />
+        </ListItem>
       )
     })
   }

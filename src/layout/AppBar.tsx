@@ -81,6 +81,7 @@ const MyAppBar: React.FC = (props) => {
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
+        onClose={handleDrawerClose}
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>

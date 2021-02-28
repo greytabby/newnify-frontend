@@ -59,10 +59,8 @@ export const rssChannelsSlice = createSlice({
 
 export const { refresh, fetchFailure, fetchSuccess, feedsFetchFailure, feedsFetchSuccess } = rssChannelsSlice.actions
 
-const baseURL = 'https://greytabby-lab.an.r.appspot.com'
-
 export const refreshAsync = (): AppThunk => async dispatch => {
-  const url = `${baseURL}/channels`
+  const url = `${process.env.REACT_APP_API_ENDPOINT}/channels`
   try {
     const resp = await axios.get<RssChannel[]>(url)
     dispatch(fetchSuccess(resp.data))
@@ -72,7 +70,7 @@ export const refreshAsync = (): AppThunk => async dispatch => {
 }
 
 export const fetchFeedsAsync = (channelId: string): AppThunk => async dispatch => {
-  const url = `${baseURL}/channels/${channelId}/feeds`
+  const url = `${process.env.REACT_APP_API_ENDPOINT}/channels/${channelId}/feeds`
   try {
     const resp = await axios.get<RssChannelFeeds>(url)
     dispatch(feedsFetchSuccess(resp.data))
