@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MyAppBar: React.FC = (props) => {
   const classes = useStyles()
-  const theme = useTheme()
 
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
