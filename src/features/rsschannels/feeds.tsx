@@ -23,9 +23,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     date: {
       margin: theme.spacing(1),
+      textTransform: "none",
+      fontSize: "0.65rem",
     },
-    inline: {
-      padding: 5,
+    itemDescription: {
+      fontSize: "0.75rem",
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontWeight: 400,
+      height: "5.32em",
+      lineHeight: 2.66,
+      letterSpacing: "0.08333em",
+      textTransform: "none",
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
   }),
 );
@@ -74,13 +84,16 @@ const Feeds: React.FC<{}> = () => {
               </React.Fragment>
             }
             secondary={
-              <Typography
-                component="span"
-                variant="subtitle1"
-                color="textSecondary"
-              >
-                {v.description.substring(0, 100) + '...'}
-              </Typography>
+              <React.Fragment>
+                <Typography
+                  className={classes.itemDescription}
+                  component="p"
+                  variant="overline"
+                  color="textSecondary"
+                >
+                  {v.description}
+                </Typography>
+              </React.Fragment>
             }
           />
         </ListItem>
