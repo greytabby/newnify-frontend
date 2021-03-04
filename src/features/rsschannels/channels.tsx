@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
     inline: {
       display: 'inline',
       padding: 5,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
   }),
 );
@@ -36,13 +38,6 @@ const ChannelList: React.FC<{}> = () => {
     dispatch(refreshAsync())
   }, [dispatch])
 
-  const displayTitle = (s: string) => {
-    if (s.length > 30) {
-      return s.substring(0, 15) + '...'
-    }
-    return s
-  }
-
   const generate = () => {
     return channels.map((v) => {
       return (
@@ -55,7 +50,7 @@ const ChannelList: React.FC<{}> = () => {
                 className={classes.inline}
                 color="textPrimary"
               >
-                {displayTitle(v.title)}
+                {v.title}
               </Typography>
             }
           />

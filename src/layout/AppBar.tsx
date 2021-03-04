@@ -8,13 +8,15 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
-
-const drawerWidth = "30%"
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import Slide from '@material-ui/core/Slide'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      width: "100%",
       flexGrow: 1,
     },
     title: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       position: 'relative',
       whiteSpace: 'nowrap',
-      width: drawerWidth,
+      width: "auto",
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -57,23 +59,30 @@ const MyAppBar: React.FC = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
-  };
+  }
+
   const handleDrawerClose = () => {
     setOpen(false);
-  };
+  }
+
+  const scrollTrigger = useScrollTrigger({})
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton onClick={handleDrawerOpen}>
-            <ChevronRightIcon/>
-          </IconButton>
-          <Typography component="h1" variant="h6" className={classes.title}>
-            Newnify
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <React.Fragment>
+      <CssBaseline />
+      <Slide appear={false} direction="down" in={!scrollTrigger}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton onClick={handleDrawerOpen}>
+              <ChevronRightIcon/>
+            </IconButton>
+            <Typography component="h1" variant="h6" className={classes.title}>
+              Newnify
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Slide>
+      <Toolbar />
       <Drawer
         variant='temporary'
         anchor='left'
@@ -90,7 +99,7 @@ const MyAppBar: React.FC = (props) => {
         </div>
         {props.children}
       </Drawer>
-    </div>
+    </React.Fragment>
   )
 }
 

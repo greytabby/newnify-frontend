@@ -5,7 +5,8 @@ import { Container } from '@material-ui/core'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex'
+      display: 'flex',
+      width: "100%",
     },
     content: {
       margin: theme.spacing(3)

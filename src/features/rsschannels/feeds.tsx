@@ -12,28 +12,34 @@ import dayjs from 'dayjs'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'block',
+      display: 'flex',
+      flexWrap: 'wrap',
+      overflow: 'hidden',
     },
     refreshIcon: {
       marginLeft: theme.spacing(1),
     },
     channelTitle: {
-      margin: theme.spacing(3),
-      flexBasis: '100%',
+      wordBreak: 'break-all',
     },
     date: {
       margin: theme.spacing(1),
       textTransform: "none",
       fontSize: "0.65rem",
     },
+    item: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      wordBreak: 'break-all',
+      margin: theme.spacing(1),
+    },
     itemDescription: {
       fontSize: "0.75rem",
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      fontWeight: 400,
       height: "5.32em",
       lineHeight: 2.66,
       letterSpacing: "0.08333em",
       textTransform: "none",
+      wordBreak: 'break-all',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     },
@@ -62,7 +68,7 @@ const Feeds: React.FC<{}> = () => {
 
     return feeds.items.map((v) => {
       return (
-        <ListItem button key={v.link} alignItems="flex-start" component="a" href={v.link} target="_blank" rel="noopener noreferrer">
+        <ListItem button className={classes.item} key={v.link} component="a" href={v.link} target="_blank" rel="noopener noreferrer">
           <ListItemText
             primary={
               <React.Fragment>
@@ -102,8 +108,8 @@ const Feeds: React.FC<{}> = () => {
   }
 
   return (
-    <div className={classes.root}>
-      <Box>
+    <React.Fragment>
+      <Box className={classes.channelTitle}>
         <Typography
           align='left'
           variant="h3"
@@ -119,10 +125,12 @@ const Feeds: React.FC<{}> = () => {
           {feeds.channel.description}
         </Typography>
       </Box>
-      <List>
-        {generate()}
-      </List>
-    </div>
+      <Box>
+        <List>
+          {generate()}
+        </List>
+      </Box>
+    </React.Fragment>
   );
 }
 
