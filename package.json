@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv-cli": "^4.0.0"
+    "dotenv-cli": "^4.0.0",
+    "twitter-d": "^0.4.0"
   }
 }

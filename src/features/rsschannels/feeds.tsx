@@ -8,14 +8,11 @@ import Box from '@material-ui/core/Box'
 import { useSelector } from 'react-redux'
 import { selectRssChannelFeeds } from './rssChannelsSlice'
 import dayjs from 'dayjs'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      overflow: 'hidden',
-    },
     refreshIcon: {
       marginLeft: theme.spacing(1),
     },
@@ -31,6 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       wordBreak: 'break-all',
       margin: theme.spacing(1),
+    },
+    largePicture: {
+      width: theme.spacing(12),
+      height: theme.spacing(12),
+      margin: theme.spacing(4),
     },
     itemDescription: {
       fontSize: "0.75rem",
@@ -69,6 +71,13 @@ const Feeds: React.FC<{}> = () => {
     return feeds.items.map((v) => {
       return (
         <ListItem button className={classes.item} key={v.link} component="a" href={v.link} target="_blank" rel="noopener noreferrer">
+          <ListItemAvatar>
+            <Avatar
+              src="https://images.unsplash.com/photo-1568307970720-a8c50b644a7c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80"
+              variant="rounded"
+              className={classes.largePicture}
+            />
+          </ListItemAvatar>
           <ListItemText
             primary={
               <React.Fragment>
