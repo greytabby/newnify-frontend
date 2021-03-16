@@ -5,8 +5,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton'
-import Refresh from '@material-ui/icons/Refresh'
 import { useSelector, useDispatch } from 'react-redux';
 import { refreshAsync, fetchFeedsAsync, selectRssChannels } from './rssChannelsSlice'
 
@@ -61,9 +59,6 @@ const ChannelList: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      <IconButton className={classes.refreshIcon} onClick={() => dispatch(refreshAsync()) }>
-        <Refresh/>
-      </IconButton>
       <Typography>
         RSS Channels
       </Typography>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import { Container } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,9 +19,9 @@ const Content: React.FC = (props) => {
   return (
     <div className={classes.root}>
       <main className={classes.content}>
-        <Container maxWidth="lg">
-          {props.children as React.ReactElement}
-        </Container>
+        <Box maxWidth="lg">
+          {props.children}
+        </Box>
       </main>
     </div>
   )

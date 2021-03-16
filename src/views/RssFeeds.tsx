@@ -1,19 +1,14 @@
 import React from 'react'
-import MyAppBar from '../layout/AppBar'
-import Content from '../layout/Content'
-import ChannelList from '../features/rsschannels/channels'
+import BaseLayout from '../layout/BaseLayout'
 import Feeds from '../features/rsschannels/feeds'
 
 const RssFeeds: React.FC<{}> = () => {
   return (
-    <div>
-      <MyAppBar>
-        <ChannelList/>
-      </MyAppBar>
-      <Content>
+    <>
+      <BaseLayout>
         <Feeds/>
-      </Content>
-    </div>
+      </BaseLayout>
+    </>
   )
 }
 

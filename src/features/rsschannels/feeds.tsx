@@ -26,12 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     item: {
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      wordBreak: 'break-all',
+      wordBreak: 'break-word',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       margin: theme.spacing(1),
     },
     largePicture: {
-      width: theme.spacing(12),
-      height: theme.spacing(12),
+      width: theme.spacing(8),
+      height: theme.spacing(8),
       margin: theme.spacing(4),
     },
     itemDescription: {
@@ -39,9 +41,9 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       height: "5.32em",
       lineHeight: 2.66,
-      letterSpacing: "0.08333em",
+      letterSpacing: "0.1em",
       textTransform: "none",
-      wordBreak: 'break-all',
+      wordBreak: 'break-word',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     },
@@ -99,16 +101,17 @@ const Feeds: React.FC<{}> = () => {
               </React.Fragment>
             }
             secondary={
-              <React.Fragment>
+              <>
                 <Typography
                   className={classes.itemDescription}
-                  component="p"
+                  component="span"
                   variant="overline"
+                  display="block"
                   color="textSecondary"
                 >
                   {v.description}
                 </Typography>
-              </React.Fragment>
+              </>
             }
           />
         </ListItem>
