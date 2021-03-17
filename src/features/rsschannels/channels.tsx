@@ -11,12 +11,8 @@ import { refreshAsync, fetchFeedsAsync, selectRssChannels } from './rssChannelsS
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      margin: 10,
-      backgroundColor: theme.palette.background.paper,
-    },
-    refreshIcon: {
-      alignContent: 'left',
-      marginLeft: theme.spacing(1),
+      margin: theme.spacing(1),
+      padding: theme.spacing(1),
     },
     inline: {
       display: 'inline',

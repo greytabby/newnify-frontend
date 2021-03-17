@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     appBar: {
       top: 'auto',
       bottom: 0,
+      padding: theme.spacing(1),
     },
     title: {
       marginRight: theme.spacing(2),
