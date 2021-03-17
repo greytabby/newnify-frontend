@@ -31,11 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
       textOverflow: 'ellipsis',
       margin: theme.spacing(1),
     },
-    largePicture: {
-      width: theme.spacing(8),
-      height: theme.spacing(8),
-      margin: theme.spacing(4),
-    },
     itemDescription: {
       fontSize: "0.75rem",
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -76,8 +71,6 @@ const Feeds: React.FC<{}> = () => {
           <ListItemAvatar>
             <Avatar
               src="https://images.unsplash.com/photo-1568307970720-a8c50b644a7c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80"
-              variant="rounded"
-              className={classes.largePicture}
             />
           </ListItemAvatar>
           <ListItemText
