@@ -11,7 +11,7 @@ import {
   ListItemText,
   List,
 } from '@material-ui/core'
-import { FullUser } from 'twitter-d'
+import { Entities, FullUser } from 'twitter-d'
 
 const HomeTimeline: React.FC<{}> = () => {
   const dispatch = useDispatch()
@@ -28,6 +28,20 @@ const HomeTimeline: React.FC<{}> = () => {
 
     return tweets.map((v) => {
       const user = v.user as FullUser
+      const generateMedia = (m: Entities) => {
+        if (m.media) {
+          return m.media.map((e) => {
+            return (
+              <ListItemAvatar>
+                <Avatar
+                  src={e.media_url_https}
+                />
+              </ListItemAvatar>
+            )
+          })
+        }
+      }
+
       return (
         <ListItem key={v.id_str}>
           <ListItemAvatar>
@@ -50,6 +64,7 @@ const HomeTimeline: React.FC<{}> = () => {
               </React.Fragment>
             }
           />
+          {generateMedia(v.entities)}
         </ListItem>
       )
     })
