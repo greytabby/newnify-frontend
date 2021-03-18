@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       width: "100%",
+      marginBottom: theme.spacing(8)
     },
     content: {
       margin: theme.spacing(3)

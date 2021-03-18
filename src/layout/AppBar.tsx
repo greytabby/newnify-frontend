@@ -4,10 +4,11 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton'
-import { Menu } from '@material-ui/icons'
+import { Menu, Twitter } from '@material-ui/icons'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { useDispatch } from 'react-redux'
 import { setOpen } from '../features/Drawer/drawerSlice'
+import { fetchTimelenAsync } from '../features/tweet/tweetSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 'auto',
       bottom: 0,
       padding: theme.spacing(1),
+    },
+    grow: {
+      flexGrow: 1,
     },
     title: {
       marginRight: theme.spacing(2),
@@ -30,6 +34,10 @@ const MyAppBar: React.FC = (props) => {
     dispatch(setOpen(true))
   }
 
+  const handleFetchTimeline = () => {
+    dispatch(fetchTimelenAsync())
+  }
+
   return (
     <>
       <CssBaseline />
@@ -41,6 +49,10 @@ const MyAppBar: React.FC = (props) => {
             <Typography component="h1" variant="h6" className={classes.title}>
               Newnify
             </Typography>
+            <div className={classes.grow}></div>
+            <IconButton onClick={handleFetchTimeline}>
+              <Twitter/>
+            </IconButton>
           </Toolbar>
         </AppBar>
       <Toolbar />

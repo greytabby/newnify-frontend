@@ -2,18 +2,31 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import BaseLayout from '../layout/BaseLayout'
 import Typography from '@material-ui/core/Typography'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { selectTweets, fetchTimelenAsync } from '../features/tweet/tweetSlice'
 import {
   Avatar,
   Box,
-  ListItemAvatar,
-  ListItem,
-  ListItemText,
   List,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  Divider,
 } from '@material-ui/core'
 import { Entities, FullUser } from 'twitter-d'
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9
+    },
+  }),
+)
+
 const HomeTimeline: React.FC<{}> = () => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchTimelenAsync())
@@ -32,40 +45,38 @@ const HomeTimeline: React.FC<{}> = () => {
         if (m.media) {
           return m.media.map((e) => {
             return (
-              <ListItemAvatar>
-                <Avatar
-                  src={e.media_url_https}
-                />
-              </ListItemAvatar>
+              <CardMedia
+                className={classes.media}
+                image={e.media_url_https}
+                title="media"
+              />
             )
           })
         }
       }
 
       return (
-        <ListItem key={v.id_str}>
-          <ListItemAvatar>
-            <Avatar
-              src={user.profile_image_url_https}
+        <>
+          <Card>
+            <CardHeader
+              avatar={
+                <Avatar src={user.profile_image_url_https}>
+                </Avatar>
+              }
+              title={user.name}
+              titleTypographyProps={{align: "left"}}
+              subheader={v.created_at}
+              subheaderTypographyProps={{align: "left"}}
             />
-          </ListItemAvatar>
-          <ListItemText
-            primary={user.name + ' ' + v.created_at}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  display="inline"
-                  color="textPrimary"
-                >
-                  {v.text}
-                </Typography>
-              </React.Fragment>
-            }
-          />
-          {generateMedia(v.entities)}
-        </ListItem>
+            <CardContent>
+              <Typography align="left" variant="body2" color="textPrimary" component="p">
+                {v.text}
+              </Typography>
+            </CardContent>
+            {generateMedia(v.entities)}
+          </Card>
+          <Divider/>
+        </>
       )
     })
   }
