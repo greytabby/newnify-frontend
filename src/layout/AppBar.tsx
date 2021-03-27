@@ -42,7 +42,7 @@ const MyAppBar: React.FC = (props) => {
     <>
       <CssBaseline />
         <AppBar position="fixed" color="primary" className={classes.appBar}>
-          <Toolbar>
+          <Toolbar variant="dense">
             <IconButton onClick={handleDrawerOpen}>
               <Menu/>
             </IconButton>
@@ -55,7 +55,6 @@ const MyAppBar: React.FC = (props) => {
             </IconButton>
           </Toolbar>
         </AppBar>
-      <Toolbar />
     </>
   )
 }

@@ -6,7 +6,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { selectFetching, selectTweets, fetchTimelenAsync } from '../features/tweet/tweetSlice'
 import {
   Avatar,
-  Box,
   List,
   Card,
   CardHeader,
@@ -21,6 +20,9 @@ import { Status, Entities, FullUser } from 'twitter-d'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    card: {
+      width: "100%",
+    },
     media: {
       height: 0,
       paddingTop: '56.25%', // 16:9
@@ -69,7 +71,7 @@ const HomeTimeline: React.FC<{}> = () => {
         const origUser = s.retweeted_status.user as FullUser
         return (
           <>
-            <Card>
+            <Card className={classes.card}>
               <CardHeader
                 avatar={
                   <Avatar src={origUser.profile_image_url_https}>
@@ -82,7 +84,7 @@ const HomeTimeline: React.FC<{}> = () => {
               />
               <CardContent>
                 <Typography align="left" variant="body2" color="textPrimary" component="p">
-                  {origStatus.text}
+                  {origStatus.full_text}
                 </Typography>
               </CardContent>
               {generateMedia(origStatus.entities)}
@@ -93,7 +95,7 @@ const HomeTimeline: React.FC<{}> = () => {
       }
       return (
         <>
-          <Card>
+          <Card className={classes.card}>
             <CardHeader
               avatar={
                 <Avatar src={user.profile_image_url_https}>
@@ -106,7 +108,7 @@ const HomeTimeline: React.FC<{}> = () => {
             />
             <CardContent>
               <Typography align="left" variant="body2" color="textPrimary" component="p">
-                {s.text}
+                {s.full_text}
               </Typography>
             </CardContent>
             {generateMedia(s.entities)}
@@ -123,16 +125,14 @@ const HomeTimeline: React.FC<{}> = () => {
   return (
     <>
       <BaseLayout>
-        <Box>
-          <Typography
-            align='left'
-            variant="h3"
-            color="textPrimary"
-            gutterBottom
-          >
-            Twitter
-          </Typography>
-        </Box>
+        <Typography
+          align='left'
+          variant="h3"
+          color="textPrimary"
+          gutterBottom
+        >
+          Twitter
+        </Typography>
         <List>
           {generate()}
         </List>

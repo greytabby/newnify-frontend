@@ -7,11 +7,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       width: "100%",
+      margin: theme.spacing(3),
       marginBottom: theme.spacing(8)
     },
-    content: {
-      margin: theme.spacing(3)
-    }
   }),
 )
 
@@ -19,8 +17,8 @@ const Content: React.FC = (props) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <main className={classes.content}>
-        <Box maxWidth="lg">
+      <main>
+        <Box justifyContent="center">
           {props.children}
         </Box>
       </main>
