@@ -2,6 +2,7 @@ import {createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk, RootState } from '../../app/store'
 import axios from 'axios'
 import {Status as Tweet} from 'twitter-d'
+import {GetHomeTimelineResponse} from './types'
 
 interface twitterState {
   tweets: Tweet[]
@@ -37,11 +38,11 @@ export const twitterSlice = createSlice({
 export const { setFetching, fetchTimelineStart, fetchTimelineFailure, fetchTimelineSuccess } = twitterSlice.actions
 
 export const fetchTimelenAsync = (): AppThunk => async dispatch => {
-  const url = `${process.env.REACT_APP_API_ENDPOINT}/tweets`
+  const url = `${process.env.REACT_APP_API_ENDPOINT}/twitter/hometimeline`
   dispatch(fetchTimelineStart())
   try {
-    const resp = await axios.get<Tweet[]>(url)
-    dispatch(fetchTimelineSuccess(resp.data))
+    const resp = await axios.get<GetHomeTimelineResponse>(url)
+    dispatch(fetchTimelineSuccess(resp.data.data))
   } catch (error) {
     dispatch(fetchTimelineFailure(error))
   } finally {

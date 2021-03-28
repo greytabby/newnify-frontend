@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 'auto',
       bottom: 0,
       padding: theme.spacing(1),
+      maxHeight: "10vh",
     },
     grow: {
       flexGrow: 1,
@@ -42,7 +43,7 @@ const MyAppBar: React.FC = (props) => {
     <>
       <CssBaseline />
         <AppBar position="fixed" color="primary" className={classes.appBar}>
-          <Toolbar variant="dense">
+          <Toolbar>
             <IconButton onClick={handleDrawerOpen}>
               <Menu/>
             </IconButton>

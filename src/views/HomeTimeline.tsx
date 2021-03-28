@@ -71,7 +71,7 @@ const HomeTimeline: React.FC<{}> = () => {
         const origUser = s.retweeted_status.user as FullUser
         return (
           <>
-            <Card className={classes.card}>
+            <Card key={s.id_str}>
               <CardHeader
                 avatar={
                   <Avatar src={origUser.profile_image_url_https}>
@@ -84,7 +84,7 @@ const HomeTimeline: React.FC<{}> = () => {
               />
               <CardContent>
                 <Typography align="left" variant="body2" color="textPrimary" component="p">
-                  {origStatus.full_text}
+                  {origStatus.full_text || origStatus.text}
                 </Typography>
               </CardContent>
               {generateMedia(origStatus.entities)}
@@ -95,7 +95,7 @@ const HomeTimeline: React.FC<{}> = () => {
       }
       return (
         <>
-          <Card className={classes.card}>
+          <Card key={s.id_str}>
             <CardHeader
               avatar={
                 <Avatar src={user.profile_image_url_https}>
@@ -108,7 +108,7 @@ const HomeTimeline: React.FC<{}> = () => {
             />
             <CardContent>
               <Typography align="left" variant="body2" color="textPrimary" component="p">
-                {s.full_text}
+                {s.full_text || s.text}
               </Typography>
             </CardContent>
             {generateMedia(s.entities)}

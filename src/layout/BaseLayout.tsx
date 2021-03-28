@@ -26,7 +26,7 @@ const BaseLayout: React.FC = (props) => {
       <Content>
         {props.children}
       </Content>
-      <MyAppBar />
+      <MyAppBar/>
     </div>
   )
 }
