@@ -1,13 +1,18 @@
 import React from 'react';
 import { useEffect } from 'react'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import {RssFeed} from '@material-ui/icons'
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+  Icon,
+} from '@material-ui/core'
+import {Twitter} from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux';
-import { refreshAsync, fetchFeedsAsync, selectRssChannels } from './rssChannelsSlice'
+import { fetchTwitterLists, fetchTwitterListTimeline, selectTwitterLists } from '../features/tweet/tweetSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,19 +34,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ChannelList: React.FC<{}> = () => {
+const TwitterLists: React.FC<{}> = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const channels = useSelector(selectRssChannels)
+  const lists = useSelector(selectTwitterLists)
 
   useEffect(() => {
-    dispatch(refreshAsync())
+    dispatch(fetchTwitterLists())
   }, [dispatch])
 
   const generate = () => {
-    return channels.map((v) => {
+    return lists.map((v) => {
       return (
-        <ListItem button key={v.id} alignItems="flex-start" component="article" onClick={() => dispatch(fetchFeedsAsync(v.id))}>
+        <ListItem button key={v.id} alignItems="flex-start" component="article" onClick={() => dispatch(fetchTwitterListTimeline(v.id_str))}>
+          <ListItemAvatar>
+            <Avatar variant="rounded" src={v.user.profile_image_url_https}/>
+          </ListItemAvatar>
+
           <ListItemText
             primary={
               <Typography
@@ -50,9 +59,10 @@ const ChannelList: React.FC<{}> = () => {
                 className={classes.inline}
                 color="textPrimary"
               >
-                {v.title}
+                {v.name}
               </Typography>
             }
+            secondary={v.description}
           />
         </ListItem>
       )
@@ -62,8 +72,8 @@ const ChannelList: React.FC<{}> = () => {
   return (
     <div className={classes.root}>
       <Typography>
-        <RssFeed color="secondary" className={classes.titleIcon}/>
-        RSS Channels
+        <Twitter color="primary" className={classes.titleIcon}/>
+        Twitter Lists
       </Typography>
       <List>
         {generate()}
@@ -72,4 +82,4 @@ const ChannelList: React.FC<{}> = () => {
   );
 }
 
-export default ChannelList
+export default TwitterLists
