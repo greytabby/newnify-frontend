@@ -62,7 +62,9 @@ const AppDrawer: React.FC = (props) => {
             <Menu/>
           </IconButton>
         </Box>
-        {props.children}
+        <Box width="auto">
+          {props.children}
+        </Box>
       </Drawer>
     </>
   )

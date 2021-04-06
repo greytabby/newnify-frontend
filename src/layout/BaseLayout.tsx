@@ -3,36 +3,27 @@ import MyAppBar from './AppBar'
 import AppDrawer from './Drawer'
 import Content from './Content'
 import ChannelList from '../features/rsschannels/channels'
-import TwiiterLists from '../views/TwitterLists'
-import { makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import TwitterLists from '../views/TwitterLists'
-import { Divider } from '@material-ui/core'
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      width: "100%",
-      height: "100%",
-      overflow: "hidden",
-    },
-  }),
-)
+import {
+  Divider,
+  Container,
+} from '@material-ui/core'
 
 const BaseLayout: React.FC = (props) => {
-  const classes = useStyles()
   return (
-    <div className={classes.root}>
-      <AppDrawer>
-        <ChannelList />
-        <Divider variant="middle" light/>
-        <TwitterLists/>
-      </AppDrawer>
-      <Content>
-        {props.children}
-      </Content>
-      <MyAppBar/>
-    </div>
+    <>
+      <Container maxWidth="md">
+        <AppDrawer>
+          <ChannelList />
+          <Divider variant="middle" light/>
+          <TwitterLists/>
+        </AppDrawer>
+        <Content>
+          {props.children}
+        </Content>
+        <MyAppBar/>
+      </Container>
+    </>
   )
 }
 

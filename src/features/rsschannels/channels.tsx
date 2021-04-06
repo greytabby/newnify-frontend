@@ -62,7 +62,7 @@ const ChannelList: React.FC<{}> = () => {
   return (
     <div className={classes.root}>
       <Typography>
-        <RssFeed color="secondary" className={classes.titleIcon}/>
+        <RssFeed color="primary" className={classes.titleIcon}/>
         RSS Channels
       </Typography>
       <List>

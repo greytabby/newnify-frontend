@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react'
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {
   List,
   ListItem,
@@ -8,10 +8,9 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
-  Icon,
 } from '@material-ui/core'
-import {Twitter} from '@material-ui/icons'
-import { useSelector, useDispatch } from 'react-redux';
+import { Twitter } from '@material-ui/icons'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchTwitterLists, fetchTwitterListTimeline, selectTwitterLists } from '../features/tweet/tweetSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textOverflow: 'ellipsis',
     },
   }),
-);
+)
 
 const TwitterLists: React.FC<{}> = () => {
   const classes = useStyles()
